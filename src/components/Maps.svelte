@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher, onMount, onDestroy } from 'svelte';
-    import { latLng } from '../store/store';
+    import { latLng, pointMakers } from '../store/store';
     import { Loader } from '@googlemaps/js-api-loader';
     export let apiKey: string = ''; 
 
@@ -34,6 +34,24 @@
         loader.load().then(() => {
             googleMaps = new google.maps.Map(document.getElementById('map') as HTMLElement, {
                 zoom: 15,
+            });
+            googleMaps.addListener('click', (event) => {
+                const maker = event.latLng;
+                new google.maps.Marker({
+                    position: maker,
+                    map: googleMaps
+                });
+                googleMaps.panTo(maker);
+                pointMakers.update((makers) => {
+                    return [
+                        ...makers,
+                        {
+                            latitude: event.latLng.lat(),
+                            longitude: event.latLng.lng(),
+                            maker 
+                        }
+                    ]
+                });
             });
             changeLoadingStatus(true);
         }).catch((err) => {

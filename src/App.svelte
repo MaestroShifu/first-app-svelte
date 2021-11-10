@@ -1,7 +1,7 @@
 <script lang="ts">
     import { ILatLng, latLng } from './store/store';
     import Maps from './components/Maps.svelte';
-    import Mqtt from './components/Mqtt.svelte';
+    import Table from './components/Table.svelte';
 
     let mapLoading: boolean = false;
 
@@ -32,7 +32,7 @@
 <main>
     <h1>App inicial</h1>
     <Maps apiKey="AIzaSyDBJNMZIhKZmGdBWkLaogYu0WnNpkZVShE" on:is-loading={handleLoadStatusMap}/>
-    <Mqtt />
+    <Table />
 </main>
 
 <style>

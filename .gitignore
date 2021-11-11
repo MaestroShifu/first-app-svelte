@@ -15,5 +15,6 @@
 /.tmp/
 
 # build
+/public/build/
 /dist/
 /.svelte-kit/

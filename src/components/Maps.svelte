@@ -2,7 +2,7 @@
     import { createEventDispatcher, onMount, onDestroy } from 'svelte';
     import { latLng, pointMakers } from '../store/store';
     import { Loader } from '@googlemaps/js-api-loader';
-    export let apiKey: string = ''; 
+    export let apiKey: string = '';
 
     let googleMaps: google.maps.Map | undefined;
     let isLoading: boolean = false;

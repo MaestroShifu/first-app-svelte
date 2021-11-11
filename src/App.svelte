@@ -5,7 +5,7 @@
 
     let mapLoading: boolean = false;
 
-    const handleLoadStatusMap = (event:CustomEvent<{isLoading: boolean}>) => {
+    const handleLoadStatusMap = (event: CustomEvent<{isLoading: boolean}>) => {
         mapLoading = event.detail.isLoading;
         const text = event.detail.isLoading ? 'Cargo el mapa de forma satisfactoria.' : 'No se pudo cargar el mapa.';
         alert(text);
@@ -31,7 +31,7 @@
 
 <main>
     <h1>App inicial</h1>
-    <Maps apiKey="AIzaSyDBJNMZIhKZmGdBWkLaogYu0WnNpkZVShE" on:is-loading={handleLoadStatusMap}/>
+    <Maps apiKey="" on:is-loading={handleLoadStatusMap}/>
     <Table />
 </main>
 

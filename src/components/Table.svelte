@@ -23,11 +23,11 @@
             <td>latitude</td>
             <td>longitude</td>
         </tr>
-        {#each makers as maker, i}
+        {#each makers as {latitude, longitude}, i}
             <tr>
                 <td>{ i + 1 }</td>
-                <td>{ maker.latitude }</td>
-                <td>{ maker.longitude }</td>
+                <td>{ latitude }</td>
+                <td>{ longitude }</td>
             </tr>
 	    {/each}
     </table>

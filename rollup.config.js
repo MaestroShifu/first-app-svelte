@@ -1,11 +1,20 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+
+import dotenv from 'dotenv';
+import path from 'path';
+
+const configEnv = {
+	path: path.join(path.dirname(__filename), './.env')
+};
+dotenv.config(configEnv);
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -39,6 +48,10 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		replace({
+			preventAssignment: true,
+			API_KEY: process.env.API_KEY
+		}),
 		svelte({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {

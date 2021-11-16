@@ -3,6 +3,7 @@
     import Maps from './components/Maps.svelte';
     import Table from './components/Table.svelte';
 
+    const API_KEY: string = 'API_KEY';
     let mapLoading: boolean = false;
 
     const handleLoadStatusMap = (event: CustomEvent<{isLoading: boolean}>) => {
@@ -31,7 +32,7 @@
 
 <main>
     <h1>App inicial</h1>
-    <Maps apiKey="" on:is-loading={handleLoadStatusMap}/>
+    <Maps apiKey={API_KEY} on:is-loading={handleLoadStatusMap}/>
     <Table />
 </main>
 

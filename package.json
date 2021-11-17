@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public --no-clear",
+    "build:all": "APP_NAME=ALL rollup -c",
+    "build:main": "APP_NAME=MAIN rollup -c",
+    "build:two_main": "APP_NAME=TWO_MAIN rollup -c",
+    "dev:all": "APP_NAME=ALL rollup -c -w",
+    "dev:main": "APP_NAME=MAIN rollup -c -w",
+    "dev:two_main": "APP_NAME=TWO_MAIN rollup -c -w",
+    "start": "sirv --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {

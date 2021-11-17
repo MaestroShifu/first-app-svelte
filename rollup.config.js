@@ -2,14 +2,19 @@ import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import resolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
-import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 
 import dotenv from 'dotenv';
 import path from 'path';
+
+const ENTRY_POINTS = { // -> Add entry points bundles
+	MAIN: 'main',
+	TWO_MAIN: 'mainTwo'
+};
 
 const configEnv = {
 	path: path.join(path.dirname(__filename), './.env')
@@ -17,18 +22,29 @@ const configEnv = {
 dotenv.config(configEnv);
 
 const production = !process.env.ROLLUP_WATCH;
+const APP_NAME = process.env.APP_NAME;
 
-function serve() {
+// Validate what type of process to run
+const validateApps = () => {
+	if(APP_NAME === 'ALL') {
+		return Object.keys(ENTRY_POINTS);
+	}
+	if(!ENTRY_POINTS[APP_NAME]) {
+		throw new Error('Invalid app name');
+	}
+	return [APP_NAME];
+}
+
+// Manage server with sirv-cli
+const serve = (appName) => {
 	let server;
-
-	function toExit() {
+	const toExit = () => {
 		if (server) server.kill(0);
 	}
-
 	return {
 		writeBundle() {
 			if (server) return;
-			server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+			server = require('child_process').spawn('npm', ['run', 'start', `public/${ENTRY_POINTS[appName]}`, '--', '--dev'], {
 				stdio: ['ignore', 'inherit', 'inherit'],
 				shell: true
 			});
@@ -39,13 +55,14 @@ function serve() {
 	};
 }
 
-export default {
-	input: 'src/main.ts',
+// Manage configuracion
+const getConfigurationRollup = (appName) => ({
+	input: `src/${ENTRY_POINTS[appName]}.ts`,
 	output: {
 		sourcemap: true,
 		format: 'iife',
-		name: 'app',
-		file: 'public/build/bundle.js'
+		name: ENTRY_POINTS[appName],
+		file: `public/${ENTRY_POINTS[appName]}/build/bundle.js`
 	},
 	plugins: [
 		replace({
@@ -61,8 +78,8 @@ export default {
 		}),
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
-		css({ output: 'bundle.css' }),
-
+		css({ output: `bundle.css` }),
+	
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
 		// some cases you'll need additional configuration -
@@ -77,15 +94,15 @@ export default {
 			sourceMap: !production,
 			inlineSources: !production
 		}),
-
+	
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
-		!production && serve(),
-
+		!production && serve(appName),
+	
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload('public'),
-
+		!production && livereload(`public/${ENTRY_POINTS[appName]}`),
+	
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser()
@@ -93,4 +110,6 @@ export default {
 	watch: {
 		clearScreen: false
 	}
-};
+});
+
+export default validateApps().map((appsName) => getConfigurationRollup(appsName));

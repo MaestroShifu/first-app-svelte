@@ -75,7 +75,7 @@ const getConfigurationRollup = (appName) => ({
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production,
-				// customElement: true -> Create web components
+				customElement: true // -> Create web components
 			}
 		}),
 

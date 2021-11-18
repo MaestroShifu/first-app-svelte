@@ -1,6 +1,7 @@
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
+import babel from '@rollup/plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import livereload from 'rollup-plugin-livereload';
@@ -73,9 +74,11 @@ const getConfigurationRollup = (appName) => ({
 			preprocess: sveltePreprocess({ sourceMap: !production }),
 			compilerOptions: {
 				// enable run-time checks when not in production
-				dev: !production
+				dev: !production,
+				// customElement: true -> Create web components
 			}
 		}),
+
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
 		css({ output: `bundle.css` }),
@@ -90,6 +93,11 @@ const getConfigurationRollup = (appName) => ({
 			dedupe: ['svelte']
 		}),
 		commonjs(),
+		babel({
+			extensions: ['.js', '.mjs', '.html', '.svelte'],
+			exclude: ['node_modules/@babel/**'],
+			babelHelpers: 'bundled'
+        }),
 		typescript({
 			sourceMap: !production,
 			inlineSources: !production

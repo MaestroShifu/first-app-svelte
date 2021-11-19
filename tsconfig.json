@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "types": [
+      "svelte",
+    //  "jest"
+    ],
     "skipLibCheck": true
   },
   "extends": "@tsconfig/svelte/tsconfig.json",

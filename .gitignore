@@ -14,10 +14,13 @@
 ## temp folders
 /.tmp/
 
-# build
+## build
 /public/**/build/
 /dist/
 /.svelte-kit/
+
+## Package locks
+package-lock.json
 
 ## Variables enviroment
 .env

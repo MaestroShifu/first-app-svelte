@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "types": [
+      "node",
       "svelte",
-    //  "jest"
+      "jest"
     ],
     "skipLibCheck": true
   },

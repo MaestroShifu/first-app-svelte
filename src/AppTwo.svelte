@@ -1,12 +1,10 @@
-<!-- Declare web components -->
-<!-- <svelte:options tag="app-two-component" /> -->
+<script>
+  export let name;
+  let buttonText = 'Button';
+  const handleClick = () => {
+    buttonText = 'Button Clicked';
+  };
+</script>
 
-<main>
-    <h1 class="title">App inicial numero 2</h1>
-</main>
-
-<style>
-    .title {
-        color: red;
-    }
-</style>
+<h1>Hello {name}!</h1>
+<button on:click={handleClick}>{buttonText}</button>

@@ -11,13 +11,34 @@
     "dev:two_main": "APP_NAME=TWO_MAIN rollup -c -w",
     "start": "sirv --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --write ./src/**/*.{svelte,ts}",
-    "lint": "eslint './src/**/*.{ts,svelte}'",
-    "lint:fix": "eslint --fix './src/**/*.{ts,svelte}'",
-    "prepare": "husky install"
+    "format": "prettier --write ./src/**/*.{svelte,ts,js}",
+    "lint": "eslint './src/**/*.{ts,svelte,js}'",
+    "lint:fix": "eslint --fix './src/**/*.{ts,svelte,js}'",
+    "prepare": "husky install",
+    "test": "jest src",
+    "test:watch": "npm run test -- --watch"
   },
   "lint-staged": {
-    "*.{js,ts,svelte}": ["npm run check", "npm run format", "npm run lint:fix"]
+    "*.{js,ts,svelte}": [
+      "npm run check",
+      "npm run format",
+      "npm run lint:fix",
+      "npm run test"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.svelte$": "svelte-jester"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "svelte"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ],
+    "testEnvironment": "jsdom"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -30,16 +51,23 @@
     "@rollup/plugin-node-resolve": "^11.0.0",
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-typescript": "^8.0.0",
+    "@testing-library/dom": "^8.11.1",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^2.0.1",
     "@types/google.maps": "^3.46.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
+    "babel-jest": "^27.3.1",
     "dotenv": "^10.0.0",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-jest-dom": "^3.9.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-svelte3": "^3.2.1",
+    "eslint-plugin-testing-library": "^5.0.0",
     "husky": "^7.0.4",
+    "jest": "^27.3.1",
     "lint-staged": "^12.0.3",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.5.0",
@@ -51,12 +79,14 @@
     "svelte": "^3.0.0",
     "svelte-check": "^2.0.0",
     "svelte-eslint-parser": "^0.6.0",
+    "svelte-jester": "^2.1.5",
     "svelte-preprocess": "^4.0.0",
     "tslib": "^2.0.0",
     "typescript": "^4.0.0"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.8",
+    "@types/jest": "^27.0.3",
     "sirv-cli": "^1.0.0"
   }
 }

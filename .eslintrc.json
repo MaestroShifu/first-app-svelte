@@ -6,7 +6,9 @@
     },
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true,
+        "commonjs": true
     },
     "globals": {
         "google": "writable",
@@ -14,8 +16,11 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:jest-dom/recommended",
+        "plugin:testing-library/dom"
     ],
+    "plugins": ["testing-library"],
     "overrides": [
         {
             "files": ["*.svelte"],
@@ -25,21 +30,25 @@
             },
             "env": { 
                 "browser": true, 
-                "node": false 
+                "node": true 
             }
         },
         {
             "files": ["src/**/*.ts", "src/**/*.js"],
             "env": { 
                 "browser": true, 
-                "node": false 
+                "node": true 
             }
-        }
-/*         {
-            "files": ["*.spec.ts"],
+        },
+        {
+            "files": ["*.spec.js", "*.test.js"],
             "env": {
                 "jest": true
             }
-        } */
+        },
+        {
+            "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+            "extends": ["plugin:testing-library/react"]
+        }
     ]
 }

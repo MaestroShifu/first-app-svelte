@@ -3,9 +3,8 @@
         [
             "@babel/preset-env", 
             {
-                "modules": false,
                 "targets": {
-                    "esmodules": true
+                    "node": "current"
                 }
             },
             "@babel/preset-typescript"

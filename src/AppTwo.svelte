@@ -1,5 +1,5 @@
-<script>
-  export let name;
+<script lang="ts">
+  export let name = '';
   let buttonText = 'Button';
   const handleClick = () => {
     buttonText = 'Button Clicked';

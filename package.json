@@ -11,9 +11,9 @@
     "dev:two_main": "APP_NAME=TWO_MAIN rollup -c -w",
     "start": "sirv --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "format": "prettier --write ./src/**/*.{svelte,ts,js}",
-    "lint": "eslint './src/**/*.{ts,svelte,js}'",
-    "lint:fix": "eslint --fix './src/**/*.{ts,svelte,js}'",
+    "format": "prettier --write ./src/**/*.{svelte,ts}",
+    "lint": "eslint './src/**/*.{ts,svelte}'",
+    "lint:fix": "eslint --fix './src/**/*.{ts,svelte}'",
     "prepare": "husky install",
     "test": "jest src",
     "test:watch": "npm run test -- --watch"
@@ -26,13 +26,20 @@
       "npm run test"
     ]
   },
+  "type": "module",
   "jest": {
     "transform": {
-      "^.+\\.js$": "babel-jest",
-      "^.+\\.svelte$": "svelte-jester"
+      "^.+\\.svelte$": [
+        "svelte-jester",
+        {
+          "preprocess": true
+        }
+      ],
+      "^.+\\.ts$": "ts-jest"
     },
     "moduleFileExtensions": [
       "js",
+      "ts",
       "svelte"
     ],
     "setupFilesAfterEnv": [
@@ -58,7 +65,6 @@
     "@types/google.maps": "^3.46.1",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
-    "babel-jest": "^27.3.1",
     "dotenv": "^10.0.0",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
@@ -80,9 +86,10 @@
     "svelte-check": "^2.0.0",
     "svelte-eslint-parser": "^0.6.0",
     "svelte-jester": "^2.1.5",
-    "svelte-preprocess": "^4.0.0",
+    "svelte-preprocess": "^4.9.8",
+    "ts-jest": "^27.0.7",
     "tslib": "^2.0.0",
-    "typescript": "^4.0.0"
+    "typescript": "^4.5.2"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.8",

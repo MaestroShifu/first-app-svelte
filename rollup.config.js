@@ -16,7 +16,6 @@ import path from 'path';
 const ENTRY_POINTS = {
   // -> Add entry points bundles
   MAIN: 'main',
-  TWO_MAIN: 'mainTwo',
 };
 
 const configEnv = {

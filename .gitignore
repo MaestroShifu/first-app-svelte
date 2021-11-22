@@ -21,6 +21,7 @@
 
 ## Package locks
 package-lock.json
+yarn.lock
 
 ## Variables enviroment
 .env

@@ -5,10 +5,8 @@
   "scripts": {
     "build:all": "APP_NAME=ALL rollup -c",
     "build:main": "APP_NAME=MAIN rollup -c",
-    "build:two_main": "APP_NAME=TWO_MAIN rollup -c",
     "dev:all": "APP_NAME=ALL rollup -c -w",
     "dev:main": "APP_NAME=MAIN rollup -c -w",
-    "dev:two_main": "APP_NAME=TWO_MAIN rollup -c -w",
     "start": "sirv --no-clear",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "format": "prettier --write ./src/**/*.{svelte,ts}",
@@ -22,8 +20,7 @@
     "*.{js,ts,svelte}": [
       "npm run check",
       "npm run format",
-      "npm run lint:fix",
-      "npm run test"
+      "npm run lint:fix"
     ]
   },
   "type": "module",

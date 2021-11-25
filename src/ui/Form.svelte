@@ -1,6 +1,7 @@
 <script lang="ts">
   import { ingredients, Ingredient } from '../domain/entities/ingredient';
   import { createProduct } from '../interfaces/product_interface';
+  import _ from 'lodash';
 
   interface FormData {
     title: string;
@@ -15,13 +16,21 @@
 
   let formData: FormData = clearForm();
 
-  const onSubmit = () => {
+  const debounceSubmit = _.debounce(() => {
+    createProductState();
+  }, 500);
+
+  const createProductState = () => {
     createProduct({
       ...formData,
       price: +formData.price,
       topping: Ingredient.chocolate,
     });
     formData = clearForm();
+  };
+
+  const onSubmit = () => {
+    debounceSubmit();
   };
 
   $: formData;

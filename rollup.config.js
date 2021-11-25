@@ -100,7 +100,7 @@ const getConfigurationRollup = (appName) => ({
     commonjs(),
     babel({
       extensions: ['.js', '.mjs', '.html', '.svelte'],
-      exclude: ['node_modules/@babel/**'],
+      exclude: ['node_modules/@babel/**', 'node_modules/**'],
       babelHelpers: 'bundled',
     }),
     typescript({

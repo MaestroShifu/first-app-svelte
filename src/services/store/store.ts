@@ -1,12 +1,15 @@
 import { writable, get } from 'svelte/store';
 import { Product } from '../../domain/entities/product';
+import { Photo } from '../../domain/entities/photo';
 
 interface GlobalStore {
   products: Array<Product>;
+  photos: Array<Photo>;
 }
 
 const startStore: GlobalStore = {
   products: [],
+  photos: [],
 };
 
 type SubscribeStoreFn = (state: GlobalStore) => void;

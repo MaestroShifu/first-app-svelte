@@ -91,6 +91,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.8",
     "@types/jest": "^27.0.3",
+    "axios": "0.21.1",
     "sirv-cli": "^1.0.0"
   }
 }

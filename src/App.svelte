@@ -2,6 +2,7 @@
   import Form from './ui/Form.svelte';
   import List from './ui/List.svelte';
   import ListPhotos from './ui/ListPhotos.svelte';
+  import RabbitMQ from './ui/RabbitMQ.svelte';
   import dayjs from 'dayjs';
   import utc from 'dayjs/plugin/utc';
 
@@ -15,6 +16,8 @@
   <span class="date-now">Fecha con dayjs: {dateNow}</span>
   <br />
   <span class="date-now-utc">Fecha con dayjs UTC 0: {dateNowUTC}</span>
+  <br />
+  <RabbitMQ />
   <br />
   <Form />
   <br />

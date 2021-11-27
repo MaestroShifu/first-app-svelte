@@ -60,8 +60,8 @@
     "@testing-library/svelte": "^3.0.3",
     "@tsconfig/svelte": "^2.0.1",
     "@types/google.maps": "^3.46.1",
-    "@types/lodash": "^4.14.177",
     "@types/jest": "^27.0.3",
+    "@types/lodash": "^4.14.177",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "dotenv": "^10.0.0",
@@ -92,9 +92,11 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.12.8",
+    "@types/paho-mqtt": "^1.0.5",
     "axios": "0.21.1",
     "dayjs": "^1.10.7",
     "lodash": "^4.17.21",
+    "paho-mqtt": "^1.1.0",
     "sirv-cli": "^1.0.0"
   }
 }

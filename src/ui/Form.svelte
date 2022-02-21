@@ -38,7 +38,7 @@
 
 <main>
   <div>
-    <span>Formulario creacion de galletas</span>
+    <span>Formulario creacion de galletas V2</span>
   </div>
 
   <br />
